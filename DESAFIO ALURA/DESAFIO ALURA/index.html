@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Mensagem Criptografada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <img src="./img/logoalura.png" alt="Foto da Joana Santos programando">
+    </header>
+
+    <main class="apresentacaoprincipal">
+        <section class="apresentacaoum">
+            <h1>
+            Digite sua mensagem:
+            </h1>
+
+            <input type="text" name="texto" id="texto" class="inputtexto" placeholder="Digite aqui">
+             
+            <div class="avisoalerta">
+                <img src="./img/exclamacao.png" alt="Ponto exclamacao">
+                <p><strong>Apenas letras minúsculas e sem acento.</strong></p>
+                <button onclick="criptografarTexto()" id="btnCriptografar" class="stilo_botaoum">Criptografar</button>
+                <button onclick="descriptografarTexto()" id="btnDescriptografar" class="stilo_botaodois">Descriptografar</button>
+            </div>
+        </section>
+        
+        <section class="apresentacaodois" id="sectionSaida">
+            <div id="mensagemInicial">
+                <h3><strong>Nenhuma mensagem encontrada</strong></h3>
+                <p>Digite um texto que você deseja criptografar ou descriptografar.</p>
+            </div>
+            <div id="textoSaida">
+                <p id="textoCriptografado"></p>
+                <p id="textoDescriptografado"></p>
+            </div>
+            <button onclick="copiarTexto()" class="stilo_botaoum" id="btnCopiarTexto" style="display: none;">Copiar Texto</button>
+            <img src="./img/pessoa sentada.png" alt="Imagem pessoa sentada" id="imagemPessoa">
+        </section>    
+    </main>
+    <footer class="rodape">
+        <p>Desenvolvido por Samuel Vieira.</p>
+    </footer>
+
+    <script>
+        function criptografarTexto() {
+            // Captura o texto digitado na entrada de dados
+            var textoDigitado = document.getElementById("texto").value;
+
+            // Substitui as letras conforme as especificações
+            var textoCriptografado = textoDigitado
+                .replace(/a/g, "ai")
+                .replace(/e/g, "enter")
+                .replace(/i/g, "imes")
+                .replace(/o/g, "ober")
+                .replace(/u/g, "ufat");
+
+            // Exibe o texto criptografado na tela
+            document.getElementById("textoCriptografado").textContent = "Texto Criptografado: " + textoCriptografado;
+
+            // Oculta a imagem e o texto inicial
+            document.getElementById("imagemPessoa").style.display = "none";
+            document.getElementById("mensagemInicial").style.display = "none";
+            // Exibe o texto de saída
+            document.getElementById("textoSaida").style.display = "block";
+            // Exibe o botão de copiar texto
+            document.getElementById("btnCopiarTexto").style.display = "inline-block";
+        }
+
+        function descriptografarTexto() {
+            // Captura o texto digitado na entrada de dados
+            var textoDigitado = document.getElementById("texto").value;
+
+            // Substitui os padrões de descriptografia
+            var textoDescriptografado = textoDigitado
+                .replace(/ai/g, "a")
+                .replace(/enter/g, "e")
+                .replace(/imes/g, "i")
+                .replace(/ober/g, "o")
+                .replace(/ufat/g, "u");
+
+            // Exibe o texto descriptografado na tela
+            document.getElementById("textoDescriptografado").textContent = "Texto Descriptografado: " + textoDescriptografado;
+
+            // Oculta a imagem e o texto inicial
+            document.getElementById("imagemPessoa").style.display = "none";
+            document.getElementById("mensagemInicial").style.display = "none";
+            // Exibe o texto de saída
+            document.getElementById("textoSaida").style.display = "block";
+            // Exibe o botão de copiar texto
+            document.getElementById("btnCopiarTexto").style.display = "inline-block";
+        }
+
+        function copiarTexto() {
+            var textoCopiar = document.getElementById("textoCriptografado").textContent || document.getElementById("textoDescriptografado").textContent;
+            navigator.clipboard.writeText(textoCopiar)
+                .then(() => alert("Texto copiado com sucesso!"))
+                .catch((err) => console.error("Erro ao copiar texto: ", err));
+        }
+    </script>
+</body>
+</html>
